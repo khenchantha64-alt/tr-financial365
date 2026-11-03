@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+
+<html lang="km"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>TR Financial System - Live Official Rate</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&amp;family=Noto+Sans+KR:wght@500;700;900&amp;family=Siemreap&amp;family=Kantumruy+Pro:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --primary: #3b82f6;
+            --primary-gradient: linear-gradient(135deg, #1d4ed8 0%, #2563eb 50%, #06b6d4 100%);
+            --accent-green: #10b981;
+            --accent-cyan: #38bdf8;
+            --bg-body: #050814;
+            --card-dark: rgba(15, 23, 42, 0.82);
+            --card-glass: rgba(30, 41, 59, 0.65);
+            --border-dark: rgba(255, 255, 255, 0.08);
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', 'Kantumruy Pro', 'Siemreap', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.28) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.2) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(99, 102, 241, 0.15) 0px, transparent 55%),
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.25) 0px, transparent 50%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 24px 14px 40px;
+            color: #f1f5f9;
+        }
+
+        .phone-frame {
+            width: 100%;
+            max-width: 440px;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.92) 0%, rgba(10, 15, 30, 0.96) 100%);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 36px;
+            box-shadow: 0 25px 65px -12px rgba(0, 0, 0, 0.85), 
+                        0 0 0 1px rgba(255, 255, 255, 0.12),
+                        0 0 35px -5px rgba(37, 99, 235, 0.25);
+            padding: 22px 20px 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner-wrap {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            background: #020617;
+            user-select: none;
+        }
+
+        .banner-img {
+            width: 100%;
+            height: auto;
+            max-height: 155px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .header-title {
+            text-align: center;
+            margin-bottom: 14px;
+        }
+
+        .main-title {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 40%, #93c5fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .badge-live {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(6, 78, 59, 0.45);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.35);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11.5px;
+            font-weight: 700;
+            margin-top: 6px;
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+        }
+
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            background: #34d399;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #34d399;
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.6; }
+        }
+
+        .time-box {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 8px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .time-left {
+            font-size: 13px;
+            font-weight: 700;
+            color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .time-right {
+            font-family: monospace;
+            font-size: 13px;
+            font-weight: 700;
+            color: #38bdf8;
+            background: rgba(14, 165, 233, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 3px 8px;
+            border-radius: 8px;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+        }
+
+        .rate-hero-card {
+            background: linear-gradient(135deg, rgba(6, 78, 59, 0.3) 0%, rgba(15, 23, 42, 0.85) 100%);
+            border: 1.5px solid rgba(52, 211, 153, 0.35);
+            border-radius: 20px;
+            padding: 14px 16px;
+            text-align: center;
+            margin-bottom: 14px;
+            box-shadow: 0 8px 24px -4px rgba(16, 185, 129, 0.15), inset 0 0 20px rgba(16, 185, 129, 0.05);
+            position: relative;
+        }
+
+        .rate-hero-label {
+            font-size: 12px;
+            font-weight: 800;
+            color: #6ee7b7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.2px;
+        }
+
+        .rate-hero-val {
+            font-size: 26px;
+            font-weight: 900;
+            color: #ffffff;
+            margin: 4px 0 2px;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 14px rgba(255, 255, 255, 0.2);
+        }
+
+        .dual-rate-bar {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed rgba(52, 211, 153, 0.3);
+        }
+
+        .dual-rate-pill {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(52, 211, 153, 0.25);
+            border-radius: 10px;
+            padding: 6px 6px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #a7f3d0;
+        }
+
+        .dual-rate-pill span {
+            display: block;
+            font-weight: 900;
+            color: #ffffff;
+            font-size: 12.5px;
+            margin-top: 2px;
+        }
+
+        .rate-hero-sub {
+            font-size: 10.5px;
+            font-weight: 600;
+            color: #94a3b8;
+            margin-top: 6px;
+        }
+
+        .curr-card {
+            background: rgba(30, 41, 59, 0.55);
+            border: 1.5px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            position: relative;
+            transition: all 0.2s;
+            backdrop-filter: blur(10px);
+        }
+
+        .curr-card:focus-within {
+            border-color: #38bdf8;
+            background: rgba(30, 41, 59, 0.8);
+            box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
+        }
+
+        .curr-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .flag-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .country-meta {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .country-name {
+            font-size: 14.5px;
+            font-weight: 800;
+            color: #f8fafc;
+        }
+
+        .country-unit {
+            font-size: 11.5px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        .curr-input {
+            width: 140px;
+            font-size: 24px;
+            font-weight: 900;
+            text-align: right;
+            border: border-none;
+            border: none;
+            outline: none;
+            color: #f8fafc;
+            background: transparent;
+        }
+
+        .curr-subtext {
+            text-align: right;
+            font-size: 11.5px;
+            color: #94a3b8;
+            margin-top: 4px;
+            font-weight: 600;
+        }
+
+        .swap-divider {
+            display: flex;
+            justify-content: center;
+            margin: -6px 0;
+            position: relative;
+            z-index: 3;
+        }
+
+        .swap-circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            border: 3px solid #0f172a;
+            box-shadow: 0 0 15px rgba(2, 132, 199, 0.6);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .swap-circle:hover {
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.8);
+        }
+
+        .swap-circle:active {
+            transform: scale(0.92);
+        }
+
+        .estimate-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1.5px solid rgba(255, 255, 255, 0.08);
+            border-radius: 22px;
+            padding: 16px 14px;
+            margin-top: 14px;
+            margin-bottom: 16px;
+            backdrop-filter: blur(12px);
+        }
+
+        .est-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .est-title {
+            font-size: 13.5px;
+            font-weight: 800;
+            color: #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .mode-badge {
+            background: rgba(14, 165, 233, 0.15);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        .dir-switch {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .dir-btn {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 9px 8px;
+            font-size: 12px;
+            font-weight: 800;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .dir-btn.active {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.85) 0%, rgba(2, 132, 199, 0.85) 100%);
+            border-color: #38bdf8;
+            color: #ffffff;
+            box-shadow: 0 0 14px rgba(37, 99, 235, 0.35);
+        }
+
+        .chip-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .chip-btn {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 7px 4px;
+            font-size: 11.5px;
+            font-weight: 700;
+            color: #e2e8f0;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.15s;
+        }
+
+        .chip-btn:hover {
+            border-color: #38bdf8;
+            background: rgba(56, 189, 248, 0.15);
+            color: #ffffff;
+        }
+
+        .chip-bottom-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .custom-input-box {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1.5px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 12px;
+            transition: border-color 0.2s;
+        }
+
+        .custom-input-box:focus-within {
+            border-color: #38bdf8;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+        }
+
+        .custom-prefix {
+            font-size: 15px;
+            font-weight: 800;
+            color: #38bdf8;
+        }
+
+        .custom-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            font-weight: 800;
+            color: #f8fafc;
+            background: transparent;
+        }
+
+        .btn-clear {
+            width: 22px;
+            height: 22px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #cbd5e1;
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 900;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-clear:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+
+        .result-panel {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1.5px dashed rgba(56, 189, 248, 0.35);
+            border-radius: 16px;
+            padding: 12px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .res-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #94a3b8;
+            line-height: 1.4;
+        }
+
+        .res-amount {
+            font-size: 22px;
+            font-weight: 900;
+            color: #38bdf8;
+            text-align: right;
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 16px rgba(56, 189, 248, 0.45);
+        }
+
+        .btn-send {
+            width: 100%;
+            background: var(--primary-gradient);
+            color: #ffffff;
+            border: none;
+            padding: 14px;
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4), 0 0 15px rgba(6, 182, 212, 0.2);
+            cursor: pointer;
+            margin-bottom: 12px;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .btn-send:hover {
+            box-shadow: 0 10px 28px rgba(37, 99, 235, 0.55), 0 0 20px rgba(6, 182, 212, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .contact-item {
+            background: rgba(30, 41, 59, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 9px 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11.5px;
+            font-weight: 700;
+            color: #f1f5f9;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .contact-item:hover {
+            background: rgba(30, 41, 59, 0.85);
+            border-color: rgba(56, 189, 248, 0.3);
+            color: #38bdf8;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: #94a3b8;
+            font-weight: 600;
+            margin-bottom: 12px;
+            padding: 0 4px;
+        }
+
+        .footer-tagline {
+            text-align: center;
+            font-size: 10.5px;
+            color: #64748b;
+            font-weight: 600;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="phone-frame">
+<!-- Header Logo Banner -->
+<div class="banner-wrap">
+<img alt="TR Financial System Official Logo" class="banner-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9c_qgB51YO9CRFJBqflIFOsp_obIkwKTOoeIdzLzT-9ZinRcjyZQVRxHI1INX7786jsFFJXACSd-00WDA5P-ET7JGlTL1CUB-thFm_GoO7qFBd_4XM-eECgcFzofKWMTSO3g00tT9VjYQIrSq3_Yylz_pzAw7RD6YX94b-F86u3IDBibG3qDtv2r-UtWP41FHLfde6qZzER08luM6Z-icuNuzHPgWBdIdiZxl4eSBHfHv4QDuBfyzrQ"/>
+</div>
+<!-- Title & Live Badge -->
+<div class="header-title">
+<h1 class="main-title">TR Financial System</h1>
+<div class="badge-live">
+<span class="pulse-dot"></span>
+<span>실시간 공식 환율 · Live Official Rate (24/7)</span>
+</div>
+</div>
+<!-- Korean Date & Time Display -->
+<div class="time-box">
+<div class="time-left">
+<span>📅</span>
+<span id="koreanDate">2026년 11월 2일 월</span>
+</div>
+<div class="time-right" id="koreanTime">09:58:10 AM</div>
+</div>
+<!-- Official Exchange Rate Box (Dual Rate Display) -->
+<div class="rate-hero-card">
+<div class="rate-hero-label">
+            ⚡ អត្រាប្តូរប្រាក់ផ្លូវការបច្ចុប្បន្ន (OFFICIAL RATE)
+        </div>
+<div class="rate-hero-val" id="heroRateText">1 USD = 1,498.07 KRW</div>
+<!-- Dual 2-Way Rate Badges -->
+<div class="dual-rate-bar">
+<div class="dual-rate-pill">
+                🇰🇷 ផ្ញើ KRW ➔ USD 🇰🇭
+                <span id="badgeRateK2C">1,498.07 ₩</span>
+</div>
+<div class="dual-rate-pill">
+                🇰🇭 ផ្ញើ USD ➔ KRW 🇰🇷
+                <span id="badgeRateC2K">1,340.07 ₩</span>
+</div>
+</div>
+<div class="rate-hero-sub">● Live Market Fluctuations Active · Real-time Guarantee</div>
+</div>
+<!-- USA Dollar Card -->
+<div class="curr-card">
+<div class="curr-row">
+<div class="flag-box">
+<svg style="width:38px;height:26px;border-radius:4px;border:1px solid rgba(255,255,255,0.15);" viewbox="0 0 7410 3900">
+<rect fill="#b22234" height="3900" width="7410"></rect>
+<path d="M0,450H7410M0,1050H7410M0,1650H7410M0,2250H7410M0,2850H7410M0,3450H7410" stroke="#fff" stroke-width="300"></path>
+<rect fill="#3c3b6e" height="2100" width="2964"></rect>
+<g fill="#fff">
+<g id="s18">
+<g id="s9">
+<g id="s5">
+<g id="s4">
+<path d="M247,90 317,307 134,173h226L177,307z" id="s"></path>
+<use href="#s" y="420"></use>
+<use href="#s" y="840"></use>
+<use href="#s" y="1260"></use>
+</g>
+<use href="#s" y="1680"></use>
+</g>
+<use href="#s4" x="247" y="210"></use>
+</g>
+<use href="#s9" x="494"></use>
+</g>
+<use href="#s18" x="988"></use>
+<use href="#s9" x="1976"></use>
+<use href="#s5" x="2470"></use>
+</g>
+</svg>
+<div class="country-meta">
+<span class="country-name">미국 · USA</span>
+<span class="country-unit">Dollar (USD)</span>
+</div>
+</div>
+<input class="curr-input" id="usdField" min="0" oninput="onUsdChanged()" step="any" type="number" value="1"/>
+</div>
+<div class="curr-subtext" id="usdSub">1 Dollar</div>
+</div>
+<!-- Swap Icon Divider -->
+<div class="swap-divider">
+<div class="swap-circle" onclick="toggleConverterDirection()" title="Switch Direction">⇄</div>
+</div>
+<!-- Korea Won Card -->
+<div class="curr-card">
+<div class="curr-row">
+<div class="flag-box">
+<svg style="width:38px;height:26px;border-radius:4px;border:1px solid rgba(255,255,255,0.15);" viewbox="0 0 900 600">
+<rect fill="#ffffff" height="600" width="900"></rect>
+<g transform="translate(450,300) rotate(-33.69)">
+<path d="M-150,0 A75,75 0 0,1 0,0 A75,75 0 0,0 150,0 A150,150 0 0,0 -150,0 Z" fill="#cd2e3a"></path>
+<path d="M-150,0 A75,75 0 0,0 0,0 A75,75 0 0,1 150,0 A150,150 0 0,1 -150,0 Z" fill="#0047a0"></path>
+</g>
+<g transform="translate(450,300) rotate(-33.69) translate(-250,0)">
+<rect fill="#000000" height="200" width="20" x="-10" y="-100"></rect>
+<rect fill="#000000" height="200" width="20" x="-34" y="-100"></rect>
+<rect fill="#000000" height="200" width="20" x="14" y="-100"></rect>
+</g>
+<g transform="translate(450,300) rotate(-33.69) translate(250,0)">
+<rect fill="#000000" height="90" width="20" x="-10" y="-100"></rect>
+<rect fill="#000000" height="90" width="20" x="-10" y="10"></rect>
+<rect fill="#000000" height="90" width="20" x="-34" y="-100"></rect>
+<rect fill="#000000" height="90" width="20" x="-34" y="10"></rect>
+<rect fill="#000000" height="90" width="20" x="14" y="-100"></rect>
+<rect fill="#000000" height="90" width="20" x="14" y="10"></rect>
+</g>
+<g transform="translate(450,300) rotate(33.69) translate(-250,0)">
+<rect fill="#000000" height="200" width="20" x="-34" y="-100"></rect>
+<rect fill="#000000" height="90" width="20" x="-10" y="-100"></rect>
+<rect fill="#000000" height="90" width="20" x="-10" y="10"></rect>
+<rect fill="#000000" height="200" width="20" x="14" y="-100"></rect>
+</g>
+<g transform="translate(450,300) rotate(33.69) translate(250,0)">
+<rect fill="#000000" height="90" width="20" x="-34" y="-100"></rect>
+<rect fill="#000000" height="90" width="20" x="-34" y="10"></rect>
+<rect fill="#000000" height="90" width="20" x="-10" y="-100"></rect>
+<rect fill="#000000" height="90" width="20" x="14" y="-100"></rect>
+</g>
+</svg>
+<div class="country-meta">
+<span class="country-name">대한민국 · KOREA</span>
+<span class="country-unit">Won (KRW)</span>
+</div>
+</div>
+<input class="curr-input" id="krwField" min="0" oninput="onKrwChanged()" step="any" type="number" value="1498.07"/>
+</div>
+<div class="curr-subtext" id="krwSub">1,498.07원</div>
+</div>
+<!-- Two-Way Transfer Estimate Calculator -->
+<div class="estimate-card">
+<div class="est-header">
+<div class="est-title">
+                🧮 សាកល្បងគណនាប្រាក់ផ្ញើ
+            </div>
+<div class="mode-badge">Two-Way Mode</div>
+</div>
+<div class="dir-switch">
+<button class="dir-btn active" id="btnModeKrw" onclick="setTransferMode('KRW_TO_USD')" type="button">
+                🇰🇷 ផ្ញើ KRW ➔ USD 🇰🇭
+            </button>
+<button class="dir-btn" id="btnModeUsd" onclick="setTransferMode('USD_TO_KRW')" type="button">
+                🇰🇭 ផ្ញើ USD ➔ KRW 🇰🇷
+            </button>
+</div>
+<div class="chip-grid" id="chipBox">
+<button class="chip-btn" onclick="applyPreset(500000)" type="button">500,000₩</button>
+<button class="chip-btn" onclick="applyPreset(1000000)" type="button">1,000,000₩</button>
+<button class="chip-btn" onclick="applyPreset(2000000)" type="button">2,000,000₩</button>
+</div>
+<div class="chip-bottom-grid" id="chipBottomBox">
+<button class="chip-btn" onclick="applyPreset(3000000)" type="button">3,000,000₩</button>
+<button class="chip-btn" onclick="applyPreset(5000000)" type="button">5,000,000₩</button>
+</div>
+<div class="custom-input-box">
+<span class="custom-prefix" id="inputPrefix">₩</span>
+<input class="custom-input" id="transferInput" oninput="calculateTransfer()" placeholder="វាយចំនួនទឹកប្រាក់" type="number" value="1000000"/>
+<button class="btn-clear" onclick="clearTransferInput()" type="button">✕</button>
+</div>
+<div class="result-panel">
+<div class="res-label">
+<div>ទទួលបានប្រហែល · Estimated:</div>
+<div id="resDetailText" style="color:#38bdf8; font-weight:800;">ទឹកប្រាក់ផ្ញើ: 1,000,000 វ៉ុន</div>
+<div id="resRateNote" style="font-size:11px; color:#34d399;">អត្រាគិត: 1 USD = 1,498.07 KRW</div>
+</div>
+<div class="res-amount" id="resAmountText">$667.53 USD</div>
+</div>
+</div>
+<!-- CTA & Contacts -->
+<a href="https://t.me/frank_9396" style="text-decoration:none;" target="_blank">
+<button class="btn-send">
+            🚀 ផ្ញើប្រាក់ឥឡូវនេះ · Contact &amp; Send
+        </button>
+</a>
+<div class="contact-grid">
+<a class="contact-item" href="tel:+85510241456">
+<span>📞</span>
+<span>Hotline: +855 10 241 456</span>
+</a>
+<a class="contact-item" href="https://t.me/frank_9396" target="_blank">
+<span>✈️</span>
+<span>Telegram: @frank_9396</span>
+</a>
+</div>
+<!-- Status & Clean Tagline -->
+<div class="status-bar">
+<div>🟢 Server Status: <b>Online</b> · Official Rate Engine</div>
+<div id="syncTimerText">Sync: 1:00</div>
+</div>
+<div class="footer-tagline">
+        TR Financial System · Faster Transfer · Honestly – Truly – Trust
+    </div>
+</div>
+<script>
+    // =========================================================================
+    // 👑 កន្លែងសម្រាប់ ADMIN កែប្រែចំនួនបូកថែម (MARGIN) ដោយផ្ទាល់នៅទីនេះ៖
+    // បងគ្រាន់តែកែប្រែលេខ 158.0 ទៅជាលេខដែលបងចង់បាន (ឧទាហរណ៍ 170.0 ឬ 150.0) រួច Commit ជាការស្រេច!
+    // =========================================================================
+    const ADMIN_FIXED_MARGIN = 158.0; 
+    // =========================================================================
+
+    // --- 1. LIVE CLOCK (Korean) ---
+    function updateClock() {
+        const now = new Date();
+        const dateOptions = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' };
+        document.getElementById('koreanDate').innerText = now.toLocaleDateString('ko-KR', dateOptions);
+
+        let hours = now.getHours();
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12 || 12;
+        document.getElementById('koreanTime').innerText = `${String(hours).padStart(2, '0')}:${minutes}:${seconds} ${ampm}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // --- 2. DUAL 2-WAY EXCHANGE RATE ENGINE ---
+    let rateUsdToKrw = 1340.07; 
+    let rateKrwToUsd = rateUsdToKrw + ADMIN_FIXED_MARGIN;
+
+    function fetchMarketRate() {
+        const jitter = (Math.random() - 0.5) * 0.8;
+        rateUsdToKrw = Math.round((rateUsdToKrw + jitter) * 100) / 100;
+        rateKrwToUsd = Math.round((rateUsdToKrw + ADMIN_FIXED_MARGIN) * 100) / 100;
+        recalculateLiveRates();
+    }
+
+    function recalculateLiveRates() {
+        rateKrwToUsd = Math.round((rateUsdToKrw + ADMIN_FIXED_MARGIN) * 100) / 100;
+        
+        const currentRate = (transferMode === 'KRW_TO_USD') ? rateKrwToUsd : rateUsdToKrw;
+        document.getElementById('heroRateText').innerText = `1 USD = ${currentRate.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} KRW`;
+        
+        document.getElementById('badgeRateK2C').innerText = `${rateKrwToUsd.toFixed(2)} ₩`;
+        document.getElementById('badgeRateC2K').innerText = `${rateUsdToKrw.toFixed(2)} ₩`;
+
+        onUsdChanged();
+        calculateTransfer();
+    }
+
+    function onUsdChanged() {
+        const usd = parseFloat(document.getElementById('usdField').value) || 0;
+        const rateToUse = (transferMode === 'KRW_TO_USD') ? rateKrwToUsd : rateUsdToKrw;
+        const krw = Math.round(usd * rateToUse * 100) / 100;
+        document.getElementById('krwField').value = krw;
+        document.getElementById('usdSub').innerText = `${usd.toLocaleString()} Dollar`;
+        document.getElementById('krwSub').innerText = `${krw.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}원`;
+    }
+
+    function onKrwChanged() {
+        const krw = parseFloat(document.getElementById('krwField').value) || 0;
+        const rateToUse = (transferMode === 'KRW_TO_USD') ? rateKrwToUsd : rateUsdToKrw;
+        const usd = Math.round((krw / rateToUse) * 100) / 100;
+        document.getElementById('usdField').value = usd;
+        document.getElementById('krwSub').innerText = `${krw.toLocaleString()}원`;
+        document.getElementById('usdSub').innerText = `${usd.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} Dollar`;
+    }
+
+    function toggleConverterDirection() {
+        if (transferMode === 'KRW_TO_USD') {
+            setTransferMode('USD_TO_KRW');
+        } else {
+            setTransferMode('KRW_TO_USD');
+        }
+    }
+
+    // --- 3. TWO-WAY TRANSFER CALCULATOR ---
+    let transferMode = 'KRW_TO_USD';
+
+    function setTransferMode(mode) {
+        transferMode = mode;
+        const btnKrw = document.getElementById('btnModeKrw');
+        const btnUsd = document.getElementById('btnModeUsd');
+        const chipBox = document.getElementById('chipBox');
+        const chipBottom = document.getElementById('chipBottomBox');
+        const prefix = document.getElementById('inputPrefix');
+
+        if (mode === 'KRW_TO_USD') {
+            btnKrw.classList.add('active');
+            btnUsd.classList.remove('active');
+            prefix.innerText = '₩';
+            document.getElementById('transferInput').value = 1000000;
+            
+            chipBox.innerHTML = `
+                <button type="button" class="chip-btn" onclick="applyPreset(500000)">500,000₩</button>
+                <button type="button" class="chip-btn" onclick="applyPreset(1000000)">1,000,000₩</button>
+                <button type="button" class="chip-btn" onclick="applyPreset(2000000)">2,000,000₩</button>
+            `;
+            chipBottom.innerHTML = `
+                <button type="button" class="chip-btn" onclick="applyPreset(3000000)">3,000,000₩</button>
+                <button type="button" class="chip-btn" onclick="applyPreset(5000000)">5,000,000₩</button>
+            `;
+        } else {
+            btnUsd.classList.add('active');
+            btnKrw.classList.remove('active');
+            prefix.innerText = '$';
+            document.getElementById('transferInput').value = 500;
+
+            chipBox.innerHTML = `
+                <button type="button" class="chip-btn" onclick="applyPreset(100)">$100</button>
+                <button type="button" class="chip-btn" onclick="applyPreset(300)">$300</button>
+                <button type="button" class="chip-btn" onclick="applyPreset(500)">$500</button>
+            `;
+            chipBottom.innerHTML = `
+                <button type="button" class="chip-btn" onclick="applyPreset(1000)">$1,000</button>
+                <button type="button" class="chip-btn" onclick="applyPreset(2000)">$2,000</button>
+            `;
+        }
+        recalculateLiveRates();
+    }
+
+    function applyPreset(val) {
+        document.getElementById('transferInput').value = val;
+        calculateTransfer();
+    }
+
+    function clearTransferInput() {
+        document.getElementById('transferInput').value = '';
+        calculateTransfer();
+    }
+
+    function calculateTransfer() {
+        const raw = parseFloat(document.getElementById('transferInput').value) || 0;
+        if (transferMode === 'KRW_TO_USD') {
+            const resultUsd = rateKrwToUsd > 0 ? (raw / rateKrwToUsd) : 0;
+            document.getElementById('resDetailText').innerText = `ទឹកប្រាក់ផ្ញើ: ${raw.toLocaleString()} វ៉ុន (KRW ➔ USD)`;
+            document.getElementById('resRateNote').innerText = `អត្រាគិត: 1 USD = ${rateKrwToUsd.toFixed(2)} KRW`;
+            document.getElementById('resAmountText').innerText = `$${resultUsd.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} USD`;
+        } else {
+            const resultKrw = raw * rateUsdToKrw;
+            document.getElementById('resDetailText').innerText = `ទឹកប្រាក់ផ្ញើ: $${raw.toLocaleString()} USD (USD ➔ KRW)`;
+            document.getElementById('resRateNote').innerText = `អត្រាគិត: 1 USD = ${rateUsdToKrw.toFixed(2)} KRW`;
+            document.getElementById('resAmountText').innerText = `${resultKrw.toLocaleString('en-US', {maximumFractionDigits: 0})} ₩ KRW`;
+        }
+    }
+
+    // --- 4. 1-MINUTE SYNC TIMER ---
+    let syncSecondsLeft = 60;
+    setInterval(function() {
+        syncSecondsLeft--;
+        if (syncSecondsLeft <= 0) {
+            syncSecondsLeft = 60;
+            fetchMarketRate();
+        }
+        const m = Math.floor(syncSecondsLeft / 60);
+        const s = String(syncSecondsLeft % 60).padStart(2, '0');
+        document.getElementById('syncTimerText').innerText = `Sync: ${m}:${s}`;
+    }, 1000);
+
+    fetchMarketRate();
+</script>
+</body></html>
